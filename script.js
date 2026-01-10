@@ -1,5 +1,13 @@
 console.log("JS KELOAD");
 
+document.addEventListener("DOMContentLoaded", function () {
+
+  const form = document.getElementById("formKomentar");
+  console.log("FORM:", form);
+
+});
+
+
 const form = document.getElementById('formkomentar');
 const daftarKomentar = document.getElementById('daftarkomentar');
 
