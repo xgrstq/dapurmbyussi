@@ -1,36 +1,37 @@
-console.log("JS KELOAD");
-
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("JS KELOAD.");
 
-  const form = document.getElementById("formKomentar");
-  console.log("FORM:", form);
+    const form = document.getElementById("formkomentar");
+    const daftarKomentar = document.getElementById("daftarkomentar");
 
-});
+    console.log("Form:", form);
+    console.log("Daftar Komentar:", daftarKomentar);
 
+    let Komentar= JSON.parse(localStorage.getItem("Komentar")) || [];
 
-const form = document.getElementById('formkomentar');
-const daftarKomentar = document.getElementById('daftarkomentar');
+    function renderKomentar() {
+        daftarKomentar.innerHTML = '';
+        Komentar.forEach(item => {
+            const div = document.createElement('div');
+            div.classList.add('komentar-card');
+            div.innerHTML = `
+                <strong>${item.nama}:</strong> ${item.pesan} </p>`;
+            daftarKomentar.appendChild(div);
+        });
+    }
 
-let komentar = JSON.parse(localStorage.getItem('komentar')) || [];
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-function renderKomentar() {
-    daftarKomentar.innerHTML = '';
-    komentar.forEach(item => {
-        const div = document.createElement('div');
-        div.classList.add('komentar-card');
-        div.innerHTML = `
-            <strong>${item.nama}:</strong> ${item.pesan} </p>`;
-        daftarKomentar.appendChild(div);
+        const nama = document.getElementById("nama").value;
+        const pesan = document.getElementById("pesan").value;
+
+        Komentar.push({ nama, pesan });
+        localStorage.setItem("Komentar", JSON.stringify(Komentar));
+
+        form.reset();
+        renderKomentar();
     });
-}
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const nama = document.getElementById('nama').value;
-    const pesan = document.getElementById('pesan').value;
 
-    komentar.push({ nama, pesan });
-    localStorage.setItem('komentar', JSON.stringify(komentar));
-    form.reset();
     renderKomentar();
-} );
-renderKomentar();
+});
