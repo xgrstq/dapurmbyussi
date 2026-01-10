@@ -1,3 +1,5 @@
+console.log("JS KELOAD");
+
 const form = document.getElementById('formkomentar');
 const daftarKomentar = document.getElementById('daftarkomentar');
 
