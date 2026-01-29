@@ -1,98 +1,285 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
-    <link rel="stylesheet" href="style.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>dapurmbakyussi | Catering & Sarapan Pagi</title>
-  <meta name="description" content="Usaha catering rumahan dan sarapan pagi dari dapurmbakyussi. Pre-order untuk acara dan jualan pagi jam 05.00 - 06.00.">
-</link>
-<body>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dapurmbakyussi | Sarapan & Catering</title>
 
-  <!-- HEADER / NAV -->
-  <header>
-    <h1>dapurmbakyussi</h1>
-    <nav>
-      <a href="#tentang">Tentang</a>
-      <a href="#menu">Menu</a>
-      <a href="#catering">Catering</a>
-      <a href="#kontak">Pesan</a>
-    </nav>
-  </header>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 
-  <!-- HERO SECTION -->
-  <section id="hero">
-    <h2>Masakan Rumahan, Siap Temani Harimu</h2>
-    <p>Catering rumahan & sarapan pagi jam 05.00 – 06.00</p>
-    <button>Pesan via WhatsApp</button>
-  </section>
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- TENTANG USAHA -->
-  <section id="tentang">
-    <h3>Tentang dapurmbakyussi</h3>
-    <p>
-      dapurmbakyussi adalah usaha catering rumahan yang melayani pesanan acara
-      dan jualan sarapan pagi di depan rumah. Masakan fresh, sederhana,
-      dan dibuat sepenuh hati.
-    </p>
-  </section>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            matcha: "#2f4f3e",
+            matchaLight: "#4a7a61",
+            matchaSoft: "#f2f7f3",
+            offwhite: "#fafaf9",
+            accent: "#e67e22"
+          }
+        }
+      }
+    }
+  </script>
 
-  <!-- MENU SARAPAN -->
-  <section id="menu">
-    <h3>Menu Sarapan Pagi</h3>
-    <p>Available jam 05.00 – 06.00 pagi</p>
+/* Efek blur pada navbar saat di scroll */
 
-    <div class="menu-list">
-      <div class="menu-card">
-        <h4>Menu Palsu 1</h4>
-        <p>Deskripsi singkat menu</p>
-        <span>Rp xx.xxx</span>
-      </div>
+  <style>
+    .glass-nav {
+      background: rgba(250, 250, 249, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .price-badge {
+        background: linear-gradient(135deg, #2f4f3e 0%, #4a7a61 100%);
+    }
+  </style>
+</head>
 
-      <div class="menu-card">
-        <h4>Menu Palsu 2</h4>
-        <p>Deskripsi singkat menu</p>
-        <span>Rp xx.xxx</span>
-      </div>
-    </div>
-  </section>
+<body class="bg-offwhite text-gray-800 font-sans">
 
-  <!-- CATERING -->
-  <section id="catering">
-    <h3>Layanan Catering</h3>
-    <p>
-      Menerima pesanan catering untuk acara keluarga, arisan, syukuran,
-      dan kebutuhan lainnya. Menu bisa request sesuai kebutuhan.
-    </p>
-    <button>Pre-order Catering</button>
-  </section>
+<header class="fixed top-0 left-0 w-full z-50 px-6 py-4">
+  <nav class="max-w-7xl mx-auto h-16 px-8 flex items-center justify-between glass-nav border border-white/20 shadow-sm rounded-2xl md:rounded-full">
+    <span class="font-bold tracking-tighter text-2xl text-matcha italic">
+      dapur<span class="text-gray-900 not-italic">mbakyussi.</span>
+    </span>
 
-  <!-- TESTIMONI -->
-  <section id="testimoni">
-    <h3>Ulasan Pelanggan</h3>
-        <p>"Lihat pengalaman pelanggan dapurmbakyussi langsung di Google Maps"</p>
-        <a href="https://goo.gl/maps/example" target="_blank" class="btn-gmaps">Lihat di Google Maps</a>
-      </div>
-
-      <div class="testimoni-card">
-        <p>"Sarapan pagi di sini selalu jadi favorit keluarga."</p>
-      </div>
+    <div class="hidden md:flex gap-10 text-sm font-semibold text-gray-600">
+      <a href="#hero" class="hover:text-matcha transition-colors">Home</a>
+      <a href="#menuSection" class="hover:text-matcha transition-colors">Menu Sarapan</a>
+      <a href="#catering" class="hover:text-matcha transition-colors">Catering</a>
+      <a href="#contact" class="hover:text-matcha transition-colors">Lokasi</a>
     </div>
 
-  </section>
+    <a href="https://wa.me/6285649080049" class="hidden md:block bg-matcha text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-matchaLight transition-all">
+      Pesan Sekarang
+    </a>
 
-  <!-- CTA / KONTAK -->
-  <section id="kontak">
-    <h3>Yuk Pesan Sekarang</h3>
-    <p>Hubungi kami untuk pemesanan catering atau sarapan pagi</p>
-    <button>Chat WhatsApp</button>
-  </section>
+    <button id="hamburger" class="md:hidden p-2 text-matcha">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+      </svg>
+    </button>
+  </nav>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>dapurmbakyussi © 2026</p>
-    <p>Jam Sarapan: 05.00 – 06.00</p>
-  </footer>
+  <div id="menu" class="hidden absolute top-24 left-6 right-6 bg-white rounded-2xl shadow-2xl p-8 flex flex-col gap-6 text-center font-bold text-gray-700 border border-gray-100">
+    <a href="#hero" onclick="toggleMenu()">Home</a>
+    <a href="#menuSection" onclick="toggleMenu()">Menu Sarapan</a>
+    <a href="#catering" onclick="toggleMenu()">Catering</a>
+    <a href="#contact" onclick="toggleMenu()">Lokasi</a>
+  </div>
+</header>
+
+<section id="hero" class="relative pt-44 pb-20 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+    <div class="relative z-10 text-center lg:text-left">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 text-orange-700 text-xs font-bold tracking-widest uppercase mb-6">
+        🔥 Sarapan Pagi: 06.00 - 09.00 WIB
+      </div>
+      <h1 class="text-5xl md:text-7xl font-bold text-gray-900 leading-[1.1] mb-8">
+        Makan Kenyang <br>Cuma <span class="font-serif italic font-normal text-matcha underline decoration-orange-400">7 Ribuan.</span>
+      </h1>
+      <p class="text-lg text-gray-500 mb-10 max-w-lg mx-auto lg:mx-0">
+        Awali harimu dengan masakan fresh tiap pagi. Nasi Kuning, Urap, hingga Geprek—semua harga rata tanpa tapi!
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+        <button class="px-10 py-4 bg-matcha text-white rounded-full font-bold shadow-xl shadow-matcha/30 hover:scale-105 transition-transform">
+          Order via WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <div class="relative flex justify-center">
+      <div class="absolute -z-10 w-72 h-72 bg-matcha/10 rounded-full blur-3xl"></div>
+      <div class="relative w-80 h-80 md:w-[450px] md:h-[450px] bg-gray-200 rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-white rotate-3">
+        <div class="w-full h-full flex items-center justify-center text-gray-400 italic">FOTO UTAMA SARAPAN</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menuSection" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Menu Sarapan Pagi</h2>
+      <p class="text-gray-500">Tersedia setiap hari pukul 06.00 - 09.00 WIB</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="group relative bg-matchaSoft rounded-[2.5rem] p-6 transition-all hover:bg-white hover:shadow-xl border border-transparent hover:border-matcha/10">
+        <div class="absolute -top-4 -right-4 w-16 h-16 price-badge text-white rounded-full flex items-center justify-center font-bold shadow-lg">7K</div>
+        <div class="aspect-video bg-gray-200 rounded-2xl mb-6 overflow-hidden">
+            <div class="w-full h-full flex items-center justify-center text-xs text-gray-400">FOTO NASI KUNING</div>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Nasi Kuning</h3>
+        <p class="text-gray-500 text-sm">Nasi kuning wangi bumbu alami dengan pelengkap telur/ayam suwir dan sambal.</p>
+      </div>
+
+      <div class="group relative bg-matchaSoft rounded-[2.5rem] p-6 transition-all hover:bg-white hover:shadow-xl border border-transparent hover:border-matcha/10">
+        <div class="absolute -top-4 -right-4 w-16 h-16 price-badge text-white rounded-full flex items-center justify-center font-bold shadow-lg">7K</div>
+        <div class="aspect-video bg-gray-200 rounded-2xl mb-6 overflow-hidden">
+            <div class="w-full h-full flex items-center justify-center text-xs text-gray-400">FOTO NASI URAP</div>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Nasi Urap</h3>
+        <p class="text-gray-500 text-sm">Segarnya sayuran dengan parutan kelapa berbumbu pedas manis yang menggugah selera.</p>
+      </div>
+
+      <div class="group relative bg-matchaSoft rounded-[2.5rem] p-6 transition-all hover:bg-white hover:shadow-xl border border-transparent hover:border-matcha/10">
+        <div class="absolute -top-4 -right-4 w-16 h-16 price-badge text-white rounded-full flex items-center justify-center font-bold shadow-lg">7K</div>
+        <div class="aspect-video bg-gray-200 rounded-2xl mb-6 overflow-hidden">
+            <div class="w-full h-full flex items-center justify-center text-xs text-gray-400">FOTO AYAM GEPREK</div>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Nasi Ayam Geprek</h3>
+        <p class="text-gray-500 text-sm">Nasi hangat dengan ayam goreng krispi yang digeprek dengan sambal bawang pedas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="catering" class="py-24 bg-matcha overflow-hidden relative">
+  <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="bg-white/10 backdrop-blur-md rounded-[3rem] p-8 md:p-16 border border-white/10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Terima Pesanan <br><span class="text-orange-300">Catering Bebas Request!</span></h2>
+          <p class="text-matchaSoft text-lg mb-8 leading-relaxed">
+            Punya acara arisan, ulang tahun, atau rapat kantor? Kami melayani catering dalam jumlah besar dengan menu yang bisa Anda tentukan sendiri sesuai budget dan selera.
+          </p>
+          <ul class="space-y-4 mb-10 text-white font-medium">
+            <li class="flex items-center gap-3">✅ Bebas pilih menu (Nasi Kotak/Prasmanan)</li>
+            <li class="flex items-center gap-3">✅ Harga bisa menyesuaikan budget</li>
+            <li class="flex items-center gap-3">✅ Kebersihan & Rasa Terjamin</li>
+          </ul>
+           <a href="https://wa.me/6285649080049" class="hidden md:block px-10 py-4 bg-white text-matcha rounded-full font-bold hover:scale-105 transition-transform shadow-xl">
+            Konsultasi Menu (Gratis)
+    </a>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+            <div class="h-64 bg-white/20 rounded-3xl overflow-hidden border border-white/20 flex items-center justify-center text-white text-xs italic">FOTO EVENT 1</div>
+            <div class="h-64 bg-white/20 rounded-3xl overflow-hidden border border-white/20 flex items-center justify-center text-white text-xs italic mt-8">FOTO EVENT 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="py-24">
+  <div class="max-w-xl mx-auto text-center px-6">
+    <h2 class="text-3xl font-bold mb-8">Lokasi Produksi</h2>
+    <div class="bg-white p-4 rounded-[2rem] shadow-2xl shadow-matcha/10 border border-gray-100 transform -rotate-1 hover:rotate-0 transition-transform">
+      <div class="bg-gray-200 h-64 rounded-2xl flex items-center justify-center text-gray-400 italic mb-0"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.500843255628!2d112.0288922!3d-7.947082299999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78f900742fb3af%3A0xa9bc9b3f8510f85d!2sDapur%20Mbak%20Yussi!5e0!3m2!1sid!2sid!4v1769700678533!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      <p class="text-gray-600 mb-6 font-medium">Buka setiap pagi untuk sarapan langsung di tempat atau antar alamat.</p>
+     <a href="https://www.google.com/maps/dir/?api=1&destination=-6.175392,106.827153" 
+   target="_blank" 
+   class="inline-block px-8 py-3 bg-matcha text-white rounded-full font-bold hover:bg-matchaLight transition-all shadow-lg shadow-matcha/20">
+   Petunjuk Arah
+</a>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-matcha text-gray-300 pt-20 pb-10">
+  <div class="max-w-7xl mx-auto px-6 grid gap-12 md:grid-cols-2 lg:grid-cols-4 border-b border-white/10 pb-16">
+
+    <div class="space-y-6">
+      <span class="font-bold tracking-tighter text-3xl text-white italic">
+        dapur<span class="text-white/80 not-italic">mbakyussi.</span>
+      </span>
+      <p class="text-sm leading-relaxed text-gray-400">
+        Menghadirkan kehangatan masakan rumahan dengan kualitas profesional. Higienis, terjangkau, dan selalu fresh setiap hari.
+      </p>
+      <div class="flex gap-4">
+        <a href="https://www.instagram.com/etiyusefa_?igsh=MXRmbDZyeWVoaXh2eg==" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/20 transition-all text-white">IG</a>
+        <a href="https://wa.me/6285649080049" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/20 transition-all text-white">WA</a>
+        <a href="https://www.tiktok.com/@akundinggejajan?_r=1&_t=ZS-93TnTSeXeqa" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/20 transition-all text-white">TT</a>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-xs">Navigasi</h4>
+      <ul class="space-y-4 text-sm font-medium">
+        <li><a href="#hero" class="hover:text-white transition-colors">Beranda</a></li>
+        <li><a href="#menuSection" class="hover:text-white transition-colors">Menu Sarapan</a></li>
+        <li><a href="#catering" class="hover:text-white transition-colors">Layanan Catering</a></li>
+        <li><a href="#contact" class="hover:text-white transition-colors">Lokasi & Ulasan</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-xs">Layanan Kami</h4>
+      <ul class="space-y-4 text-sm">
+        <li class="flex items-center gap-2">
+          <span class="w-1 h-1 bg-orange-400 rounded-full"></span>
+          Sarapan Pagi (Ready 06.00)
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-1 h-1 bg-orange-400 rounded-full"></span>
+          Catering Nasi Kotak
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-1 h-1 bg-orange-400 rounded-full"></span>
+          Pesanan Prasmanan
+        </li>
+        <li class="flex items-center gap-2">
+          <span class="w-1 h-1 bg-orange-400 rounded-full"></span>
+          Snack Box Acara
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-xs">Kontak & Jam</h4>
+      <ul class="space-y-4 text-sm text-gray-400">
+        <li class="flex items-start gap-3">
+          <span class="text-lg leading-none">📍</span>
+          <span>Bulurejo, Sumberjo, Kec. Kandat, Kabupaten Kediri, Jawa Timur 64173
+        <li class="flex items-start gap-3">
+          <span class="text-lg leading-none">⏰</span>
+          <div>
+            <p class="text-white">Sarapan: 06.00 - 09.00</p>
+            <p>Catering: By Request (24 Jam Order)</p>
+          </div>
+        </li>
+        <li class="flex items-start gap-3 pt-2">
+          <span class="text-lg leading-none">📞</span>
+          <a href="https://wa.me/6285649080049" class="text-white font-bold underline decoration-orange-400 decoration-2 underline-offset-4 tracking-wide">
+            0856=4908=0049
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 pt-10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+    <p>© 2026 dapurmbakyussi. All rights reserved.</p>
+    <div class="flex gap-6 italic">
+      <span>Masakan Rumahan, Standar Bisnis.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById("hamburger");
+  const menu = document.getElementById("menu");
+  hamburger.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+
+// Fungsi biar menu ketutup pas link di klik
+
+  function toggleMenu() {
+    menu.classList.add("hidden");
+  }
+</script>
 
 </body>
 </html>
